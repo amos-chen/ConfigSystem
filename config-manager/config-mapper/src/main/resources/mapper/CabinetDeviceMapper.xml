@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amos.dao.CabinetDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.amos.pojo.CabinetDevice">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="cabinet_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="model" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="support_banks" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="voltage" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="each_bank_current" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cabinet_type, model, support_banks, voltage, each_bank_current, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cabinet_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectConvergenceByInfo" resultType="java.lang.String">
+    SELECT
+    model
+    FROM
+    cabinet_device
+    WHERE
+    cabinet_type = #{deviceType}
+    AND support_banks = #{banks}
+    AND each_bank_current = (
+    SELECT
+    min(each_bank_current)
+    FROM
+    cabinet_device
+    WHERE
+    cabinet_type = #{deviceType}
+    AND support_banks = #{banks}
+    AND each_bank_current >= #{current}
+    )
+  </select>
+  <select id="selectManagementCabinetByInfo" resultType="java.lang.String">
+    SELECT
+    model
+    FROM
+    cabinet_device
+    WHERE
+    cabinet_type = #{deviceType}
+    AND support_banks = #{banks}
+    AND each_bank_current = (
+    SELECT
+    min(each_bank_current)
+    FROM
+    cabinet_device
+    WHERE
+    cabinet_type = #{deviceType}
+    AND support_banks = #{banks}
+    AND each_bank_current >= #{current}
+    )
+
+  </select>
+  <select id="selectControlCabinetByInfo" resultType="java.lang.String">
+    SELECT
+    model
+    FROM
+    cabinet_device
+    WHERE
+    cabinet_type = #{deviceType}
+    AND each_bank_current = (
+    SELECT
+    min(each_bank_current)
+    FROM
+    cabinet_device
+    WHERE
+    each_bank_current >= #{current}
+    AND voltage >= #{voltage}
+    AND cabinet_type = #{deviceType}
+    )
+    AND voltage = (
+    SELECT
+    min(voltage)
+    FROM
+    cabinet_device
+    WHERE
+    each_bank_current >= #{current}
+    AND voltage >= #{voltage}
+    AND cabinet_type = #{deviceType}
+    )
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cabinet_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.amos.pojo.CabinetDevice">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cabinet_device (cabinet_type, model, support_banks, 
+      voltage, each_bank_current, create_time, 
+      update_time)
+    values (#{cabinetType,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, #{supportBanks,jdbcType=INTEGER}, 
+      #{voltage,jdbcType=INTEGER}, #{eachBankCurrent,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.amos.pojo.CabinetDevice">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cabinet_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cabinetType != null">
+        cabinet_type,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="supportBanks != null">
+        support_banks,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="eachBankCurrent != null">
+        each_bank_current,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cabinetType != null">
+        #{cabinetType,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBanks != null">
+        #{supportBanks,jdbcType=INTEGER},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="eachBankCurrent != null">
+        #{eachBankCurrent,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.amos.pojo.CabinetDevice">
+    update cabinet_device
+    <set>
+      <if test="cabinetType != null">
+        cabinet_type = #{cabinetType,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBanks != null">
+        support_banks = #{supportBanks,jdbcType=INTEGER},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="eachBankCurrent != null">
+        each_bank_current = #{eachBankCurrent,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.amos.pojo.CabinetDevice">
+    update cabinet_device
+    set cabinet_type = #{cabinetType,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      support_banks = #{supportBanks,jdbcType=INTEGER},
+      voltage = #{voltage,jdbcType=INTEGER},
+      each_bank_current = #{eachBankCurrent,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into cabinet_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].cabinetType!=null">
+        cabinet_type,
+      </if>
+      <if test="list[0].model!=null">
+        model,
+      </if>
+      <if test="list[0].supportBanks!=null">
+        support_banks,
+      </if>
+      <if test="list[0].voltage!=null">
+        voltage,
+      </if>
+      <if test="list[0].eachBankCurrent!=null">
+        each_bank_current,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+      <if test="list[0].updateTime!=null">
+        update_time,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.cabinetType!=null">
+          #{item.cabinetType,jdbcType=INTEGER},
+        </if>
+        <if test="item.model!=null">
+          #{item.model,jdbcType=VARCHAR},
+        </if>
+        <if test="item.supportBanks!=null">
+          #{item.supportBanks,jdbcType=INTEGER},
+        </if>
+        <if test="item.voltage!=null">
+          #{item.voltage,jdbcType=INTEGER},
+        </if>
+        <if test="item.eachBankCurrent!=null">
+          #{item.eachBankCurrent,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update cabinet_device
+      <set>
+        <if test="item.cabinetType!=null">
+          cabinet_type=#{item.cabinetType,jdbcType=INTEGER},
+        </if>
+        <if test="item.model!=null">
+          model=#{item.model,jdbcType=VARCHAR},
+        </if>
+        <if test="item.supportBanks!=null">
+          support_banks=#{item.supportBanks,jdbcType=INTEGER},
+        </if>
+        <if test="item.voltage!=null">
+          voltage=#{item.voltage,jdbcType=INTEGER},
+        </if>
+        <if test="item.eachBankCurrent!=null">
+          each_bank_current=#{item.eachBankCurrent,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where 
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amos.dao.ConfigurationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.amos.pojo.ConfigurationInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="config_result_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+    <association column="id" property="applicationInfo" select="getApplicationInfo" />
+    <association column="id" property="environmentInfo" select="getEnvironmentInfo" />
+    <collection column="id" property="upsInfos" select="getUpsInfos" />
+    <collection column="id" property="smpsInfos" select="getSmpsInfos" />
+    <collection column="id" property="directCurrentPanelInfos" select="getDirectCurrentPanelInfos" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, config_result_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from configuration_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from configuration_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.amos.pojo.ConfigurationInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into configuration_info (config_result_id, create_time, update_time
+      )
+    values (#{configResultId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.amos.pojo.ConfigurationInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into configuration_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configResultId != null">
+        config_result_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configResultId != null">
+        #{configResultId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.amos.pojo.ConfigurationInfo">
+    update configuration_info
+    <set>
+      <if test="configResultId != null">
+        config_result_id = #{configResultId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.amos.pojo.ConfigurationInfo">
+    update configuration_info
+    set config_result_id = #{configResultId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getApplicationInfo" resultMap="com.amos.dao.ApplicationInfoMapper.BaseResultMap">
+    select id,config_id,project_title,application,management_function,language,create_time,update_time from application_info where config_id=#{id}
+  </select>
+  <select id="getEnvironmentInfo" resultMap="com.amos.dao.EnvironmentInfoMapper.BaseResultMap">
+    select id,config_id,need_server,need_gsm_modem,need_backup,battery_room_number,create_time,update_time from environment_info where config_id=#{id}
+  </select>
+  <select id="getUpsInfos" resultMap="com.amos.dao.UpsInfoMapper.BaseResultMap">
+    select id,config_id,brand,model,power,number,is_three_wire,need_convergence,support_dry_node,create_time,update_time from ups_info where config_id=#{id} 
+  </select>
+  <select id="getSmpsInfos" resultMap="com.amos.dao.SmpsInfoMapper.BaseResultMap">
+    select id,config_id,brand,power,number,need_single_monitor,need_energy_saving,need_smart_meter,need_leakage_sensor,create_time,update_time from smps_info where config_id=#{id} 
+  </select>
+  <select id="getDirectCurrentPanelInfos" resultMap="com.amos.dao.DirectCurrentPanelInfoMapper.BaseResultMap">
+    select id,config_id,brand,model,number,max_charge_current,max_discharge_current,need_leakage_sensor,create_time,update_time from direct_current_panel_info where config_id=#{id} 
+  </select>
+  <select id="selectBaseInfoById" resultType="com.amos.pojo.ConfigurationInfo">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM configuration_info
+    WHERE id=#{configId}
+  </select>
+
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into configuration_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].configResultId!=null">
+        config_result_id,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+      <if test="list[0].updateTime!=null">
+        update_time,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.configResultId!=null">
+          #{item.configResultId,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update configuration_info
+      <set>
+        <if test="item.configResultId!=null">
+          config_result_id=#{item.configResultId,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where 
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

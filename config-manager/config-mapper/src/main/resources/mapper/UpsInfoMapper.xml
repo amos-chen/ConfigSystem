@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amos.dao.UpsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.amos.pojo.UpsInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="config_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="brand" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="model" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="power" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="is_three_wire" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="need_convergence" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="support_dry_node" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+    <association column="id" property="batteryInfo" select="getBatteryInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, config_id, brand, model, power, number, is_three_wire, need_convergence, support_dry_node, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ups_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ups_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.amos.pojo.UpsInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ups_info (config_id, brand, model, 
+      power, number, is_three_wire, 
+      need_convergence, support_dry_node, create_time, 
+      update_time)
+    values (#{configId,jdbcType=INTEGER}, #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{power,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{isThreeWire,jdbcType=BIT}, 
+      #{needConvergence,jdbcType=BIT}, #{supportDryNode,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.amos.pojo.UpsInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ups_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="power != null">
+        power,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="isThreeWire != null">
+        is_three_wire,
+      </if>
+      <if test="needConvergence != null">
+        need_convergence,
+      </if>
+      <if test="supportDryNode != null">
+        support_dry_node,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null">
+        #{power,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="isThreeWire != null">
+        #{isThreeWire,jdbcType=BIT},
+      </if>
+      <if test="needConvergence != null">
+        #{needConvergence,jdbcType=BIT},
+      </if>
+      <if test="supportDryNode != null">
+        #{supportDryNode,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.amos.pojo.UpsInfo">
+    update ups_info
+    <set>
+      <if test="configId != null">
+        config_id = #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null">
+        power = #{power,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="isThreeWire != null">
+        is_three_wire = #{isThreeWire,jdbcType=BIT},
+      </if>
+      <if test="needConvergence != null">
+        need_convergence = #{needConvergence,jdbcType=BIT},
+      </if>
+      <if test="supportDryNode != null">
+        support_dry_node = #{supportDryNode,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.amos.pojo.UpsInfo">
+    update ups_info
+    set config_id = #{configId,jdbcType=INTEGER},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      power = #{power,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      is_three_wire = #{isThreeWire,jdbcType=BIT},
+      need_convergence = #{needConvergence,jdbcType=BIT},
+      support_dry_node = #{supportDryNode,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getBatteryInfo" resultMap="com.amos.dao.BatteryInfoMapper.BaseResultMap">
+    select id,power_id,battery_voltage,battery_capacity,banks,each_bank_number,bus_diameter,width,create_time,update_time from battery_info where power_id=#{id}
+  </select>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into ups_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].configId!=null">
+        config_id,
+      </if>
+      <if test="list[0].brand!=null">
+        brand,
+      </if>
+      <if test="list[0].model!=null">
+        model,
+      </if>
+      <if test="list[0].power!=null">
+        power,
+      </if>
+      <if test="list[0].number!=null">
+        number,
+      </if>
+      <if test="list[0].isThreeWire!=null">
+        is_three_wire,
+      </if>
+      <if test="list[0].needConvergence!=null">
+        need_convergence,
+      </if>
+      <if test="list[0].supportDryNode!=null">
+        support_dry_node,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+      <if test="list[0].updateTime!=null">
+        update_time,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.configId!=null">
+          #{item.configId,jdbcType=INTEGER},
+        </if>
+        <if test="item.brand!=null">
+          #{item.brand,jdbcType=VARCHAR},
+        </if>
+        <if test="item.model!=null">
+          #{item.model,jdbcType=VARCHAR},
+        </if>
+        <if test="item.power!=null">
+          #{item.power,jdbcType=INTEGER},
+        </if>
+        <if test="item.number!=null">
+          #{item.number,jdbcType=INTEGER},
+        </if>
+        <if test="item.isThreeWire!=null">
+          #{item.isThreeWire,jdbcType=BIT},
+        </if>
+        <if test="item.needConvergence!=null">
+          #{item.needConvergence,jdbcType=BIT},
+        </if>
+        <if test="item.supportDryNode!=null">
+          #{item.supportDryNode,jdbcType=BIT},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update ups_info
+      <set>
+        <if test="item.configId!=null">
+          config_id=#{item.configId,jdbcType=INTEGER},
+        </if>
+        <if test="item.brand!=null">
+          brand=#{item.brand,jdbcType=VARCHAR},
+        </if>
+        <if test="item.model!=null">
+          model=#{item.model,jdbcType=VARCHAR},
+        </if>
+        <if test="item.power!=null">
+          power=#{item.power,jdbcType=INTEGER},
+        </if>
+        <if test="item.number!=null">
+          number=#{item.number,jdbcType=INTEGER},
+        </if>
+        <if test="item.isThreeWire!=null">
+          is_three_wire=#{item.isThreeWire,jdbcType=BIT},
+        </if>
+        <if test="item.needConvergence!=null">
+          need_convergence=#{item.needConvergence,jdbcType=BIT},
+        </if>
+        <if test="item.supportDryNode!=null">
+          support_dry_node=#{item.supportDryNode,jdbcType=BIT},
+        </if>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where 
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

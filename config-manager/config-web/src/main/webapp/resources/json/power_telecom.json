@@ -1,0 +1,33 @@
+{
+  "group": "开关电源",
+  "params": [
+    {
+      "name": "brand",
+      "value": "运营商"
+    },
+    {
+      "name": "power",
+      "value": "功率(kw)"
+    },
+    {
+      "name": "number",
+      "value": "数量"
+    },
+    {
+      "name": "needSingleMonitor",
+      "value": "是否需要单体采集"
+    },
+    {
+      "name": "needEnergySaving",
+      "value": "是否需要空调节能"
+    },
+    {
+      "name": "needSmartMeter",
+      "value": "是否需要智能电表"
+    },
+    {
+      "name": "needLeakageSensor",
+      "value": "是否需要漏液监测"
+    }
+  ]
+}

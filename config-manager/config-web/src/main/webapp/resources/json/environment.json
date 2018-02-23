@@ -1,0 +1,1 @@
+{"group":"环境信息","params":[{"name":"needServer","value":"是否本地部署"},{"name":"needGsmModem","value":"是否需要短信告警"},{"name":"needBackup","value":"是否需要备品"},{"name":"batteryRoomNumber","value":"电池房数量"}]}

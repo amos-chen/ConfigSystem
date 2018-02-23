@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amos.dao.EnvironmentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.amos.pojo.EnvironmentInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="config_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="need_server" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="need_gsm_modem" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="need_backup" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="battery_room_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, config_id, need_server, need_gsm_modem, need_backup, battery_room_number, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from environment_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from environment_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.amos.pojo.EnvironmentInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into environment_info (config_id, need_server, need_gsm_modem, 
+      need_backup, battery_room_number, create_time, 
+      update_time)
+    values (#{configId,jdbcType=INTEGER}, #{needServer,jdbcType=BIT}, #{needGsmModem,jdbcType=BIT}, 
+      #{needBackup,jdbcType=BIT}, #{batteryRoomNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.amos.pojo.EnvironmentInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into environment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="needServer != null">
+        need_server,
+      </if>
+      <if test="needGsmModem != null">
+        need_gsm_modem,
+      </if>
+      <if test="needBackup != null">
+        need_backup,
+      </if>
+      <if test="batteryRoomNumber != null">
+        battery_room_number,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="needServer != null">
+        #{needServer,jdbcType=BIT},
+      </if>
+      <if test="needGsmModem != null">
+        #{needGsmModem,jdbcType=BIT},
+      </if>
+      <if test="needBackup != null">
+        #{needBackup,jdbcType=BIT},
+      </if>
+      <if test="batteryRoomNumber != null">
+        #{batteryRoomNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.amos.pojo.EnvironmentInfo">
+    update environment_info
+    <set>
+      <if test="configId != null">
+        config_id = #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="needServer != null">
+        need_server = #{needServer,jdbcType=BIT},
+      </if>
+      <if test="needGsmModem != null">
+        need_gsm_modem = #{needGsmModem,jdbcType=BIT},
+      </if>
+      <if test="needBackup != null">
+        need_backup = #{needBackup,jdbcType=BIT},
+      </if>
+      <if test="batteryRoomNumber != null">
+        battery_room_number = #{batteryRoomNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.amos.pojo.EnvironmentInfo">
+    update environment_info
+    set config_id = #{configId,jdbcType=INTEGER},
+      need_server = #{needServer,jdbcType=BIT},
+      need_gsm_modem = #{needGsmModem,jdbcType=BIT},
+      need_backup = #{needBackup,jdbcType=BIT},
+      battery_room_number = #{batteryRoomNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into environment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].configId!=null">
+        config_id,
+      </if>
+      <if test="list[0].needServer!=null">
+        need_server,
+      </if>
+      <if test="list[0].needGsmModem!=null">
+        need_gsm_modem,
+      </if>
+      <if test="list[0].needBackup!=null">
+        need_backup,
+      </if>
+      <if test="list[0].batteryRoomNumber!=null">
+        battery_room_number,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+      <if test="list[0].updateTime!=null">
+        update_time,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.configId!=null">
+          #{item.configId,jdbcType=INTEGER},
+        </if>
+        <if test="item.needServer!=null">
+          #{item.needServer,jdbcType=BIT},
+        </if>
+        <if test="item.needGsmModem!=null">
+          #{item.needGsmModem,jdbcType=BIT},
+        </if>
+        <if test="item.needBackup!=null">
+          #{item.needBackup,jdbcType=BIT},
+        </if>
+        <if test="item.batteryRoomNumber!=null">
+          #{item.batteryRoomNumber,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update environment_info
+      <set>
+        <if test="item.configId!=null">
+          config_id=#{item.configId,jdbcType=INTEGER},
+        </if>
+        <if test="item.needServer!=null">
+          need_server=#{item.needServer,jdbcType=BIT},
+        </if>
+        <if test="item.needGsmModem!=null">
+          need_gsm_modem=#{item.needGsmModem,jdbcType=BIT},
+        </if>
+        <if test="item.needBackup!=null">
+          need_backup=#{item.needBackup,jdbcType=BIT},
+        </if>
+        <if test="item.batteryRoomNumber!=null">
+          battery_room_number=#{item.batteryRoomNumber,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where 
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

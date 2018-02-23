@@ -1,0 +1,29 @@
+{
+  "group": "电池信息",
+  "params": [
+    {
+      "name": "batteryVoltage",
+      "value": "电池电压(V)"
+    },
+    {
+      "name": "batteryCapacity",
+      "value": "电池容量(Ah)"
+    },
+    {
+      "name": "banks",
+      "value": "电池组数"
+    },
+    {
+      "name": "eachBankNumber",
+      "value": "每组电池数量"
+    },
+    {
+      "name": "busDiameter",
+      "value": "母线直径(mm2)"
+    },
+    {
+      "name": "width",
+      "value": "电池宽(mm)"
+    }
+  ]
+}

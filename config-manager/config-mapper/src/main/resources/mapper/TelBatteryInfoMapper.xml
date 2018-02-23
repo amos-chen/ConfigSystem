@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amos.dao.TelBatteryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.amos.pojo.TelBatteryInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="power_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="battery_voltage" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="battery_capacity" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="banks" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="each_bank_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="bus_diameter" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="width" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, power_id, battery_voltage, battery_capacity, banks, each_bank_number, bus_diameter, 
+    width, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tel_battery_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tel_battery_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.amos.pojo.TelBatteryInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tel_battery_info (power_id, battery_voltage, battery_capacity, 
+      banks, each_bank_number, bus_diameter, 
+      width, create_time, update_time
+      )
+    values (#{powerId,jdbcType=INTEGER}, #{batteryVoltage,jdbcType=INTEGER}, #{batteryCapacity,jdbcType=INTEGER}, 
+      #{banks,jdbcType=INTEGER}, #{eachBankNumber,jdbcType=INTEGER}, #{busDiameter,jdbcType=INTEGER}, 
+      #{width,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.amos.pojo.TelBatteryInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tel_battery_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="powerId != null">
+        power_id,
+      </if>
+      <if test="batteryVoltage != null">
+        battery_voltage,
+      </if>
+      <if test="batteryCapacity != null">
+        battery_capacity,
+      </if>
+      <if test="banks != null">
+        banks,
+      </if>
+      <if test="eachBankNumber != null">
+        each_bank_number,
+      </if>
+      <if test="busDiameter != null">
+        bus_diameter,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="powerId != null">
+        #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="batteryVoltage != null">
+        #{batteryVoltage,jdbcType=INTEGER},
+      </if>
+      <if test="batteryCapacity != null">
+        #{batteryCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="banks != null">
+        #{banks,jdbcType=INTEGER},
+      </if>
+      <if test="eachBankNumber != null">
+        #{eachBankNumber,jdbcType=INTEGER},
+      </if>
+      <if test="busDiameter != null">
+        #{busDiameter,jdbcType=INTEGER},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.amos.pojo.TelBatteryInfo">
+    update tel_battery_info
+    <set>
+      <if test="powerId != null">
+        power_id = #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="batteryVoltage != null">
+        battery_voltage = #{batteryVoltage,jdbcType=INTEGER},
+      </if>
+      <if test="batteryCapacity != null">
+        battery_capacity = #{batteryCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="banks != null">
+        banks = #{banks,jdbcType=INTEGER},
+      </if>
+      <if test="eachBankNumber != null">
+        each_bank_number = #{eachBankNumber,jdbcType=INTEGER},
+      </if>
+      <if test="busDiameter != null">
+        bus_diameter = #{busDiameter,jdbcType=INTEGER},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.amos.pojo.TelBatteryInfo">
+    update tel_battery_info
+    set power_id = #{powerId,jdbcType=INTEGER},
+      battery_voltage = #{batteryVoltage,jdbcType=INTEGER},
+      battery_capacity = #{batteryCapacity,jdbcType=INTEGER},
+      banks = #{banks,jdbcType=INTEGER},
+      each_bank_number = #{eachBankNumber,jdbcType=INTEGER},
+      bus_diameter = #{busDiameter,jdbcType=INTEGER},
+      width = #{width,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into tel_battery_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].powerId!=null">
+        power_id,
+      </if>
+      <if test="list[0].batteryVoltage!=null">
+        battery_voltage,
+      </if>
+      <if test="list[0].batteryCapacity!=null">
+        battery_capacity,
+      </if>
+      <if test="list[0].banks!=null">
+        banks,
+      </if>
+      <if test="list[0].eachBankNumber!=null">
+        each_bank_number,
+      </if>
+      <if test="list[0].busDiameter!=null">
+        bus_diameter,
+      </if>
+      <if test="list[0].width!=null">
+        width,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+      <if test="list[0].updateTime!=null">
+        update_time,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.powerId!=null">
+          #{item.powerId,jdbcType=INTEGER},
+        </if>
+        <if test="item.batteryVoltage!=null">
+          #{item.batteryVoltage,jdbcType=INTEGER},
+        </if>
+        <if test="item.batteryCapacity!=null">
+          #{item.batteryCapacity,jdbcType=INTEGER},
+        </if>
+        <if test="item.banks!=null">
+          #{item.banks,jdbcType=INTEGER},
+        </if>
+        <if test="item.eachBankNumber!=null">
+          #{item.eachBankNumber,jdbcType=INTEGER},
+        </if>
+        <if test="item.busDiameter!=null">
+          #{item.busDiameter,jdbcType=INTEGER},
+        </if>
+        <if test="item.width!=null">
+          #{item.width,jdbcType=DOUBLE},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update tel_battery_info
+      <set>
+        <if test="item.powerId!=null">
+          power_id=#{item.powerId,jdbcType=INTEGER},
+        </if>
+        <if test="item.batteryVoltage!=null">
+          battery_voltage=#{item.batteryVoltage,jdbcType=INTEGER},
+        </if>
+        <if test="item.batteryCapacity!=null">
+          battery_capacity=#{item.batteryCapacity,jdbcType=INTEGER},
+        </if>
+        <if test="item.banks!=null">
+          banks=#{item.banks,jdbcType=INTEGER},
+        </if>
+        <if test="item.eachBankNumber!=null">
+          each_bank_number=#{item.eachBankNumber,jdbcType=INTEGER},
+        </if>
+        <if test="item.busDiameter!=null">
+          bus_diameter=#{item.busDiameter,jdbcType=INTEGER},
+        </if>
+        <if test="item.width!=null">
+          width=#{item.width,jdbcType=DOUBLE},
+        </if>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where 
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

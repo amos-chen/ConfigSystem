@@ -1,0 +1,30 @@
+{"group": "ups", "params": [
+    {
+      "name": "brand",
+      "value": "品牌"
+    },
+    {
+      "name": "model",
+      "value": "型号"
+    },
+    {
+      "name": "power",
+      "value": "功率(kva)"
+    },
+    {
+      "name": "number",
+      "value": "数量"
+    },
+    {
+      "name": "isThreeWire",
+      "value": "是否为三线制"
+    },
+    {
+      "name": "needConvergence",
+      "value": "是否需要汇流柜"
+    },
+    {
+      "name": "supportDryNode",
+      "value": "是否支持干节点"
+    }
+  ]}

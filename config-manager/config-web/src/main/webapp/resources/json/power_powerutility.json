@@ -1,0 +1,29 @@
+{
+  "group": "直流屏",
+  "params": [
+    {
+      "name": "brand",
+      "value": "品牌"
+    },
+    {
+      "name": "model",
+      "value": "型号"
+    },
+    {
+      "name": "number",
+      "value": "数量"
+    },
+    {
+      "name": "maxChargeCurrent",
+      "value": "最大充电电流(A)"
+    },
+    {
+      "name": "maxDischargeCurrent",
+      "value": "最大放电电流(A)"
+    },
+    {
+      "name": "needLeakageSensor",
+      "value": "是否需要漏液监测"
+    }
+  ]
+}
