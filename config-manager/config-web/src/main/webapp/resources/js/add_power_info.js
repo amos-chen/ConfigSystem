@@ -33,22 +33,28 @@ var addPowerInfo = {
         var powerTitle = "";
         if (data.application == addPowerInfo.Constant.DATACENTER) {
             powerTitle = "UPS信息";
+            $.ajaxSettings.async = false;
             $.getJSON(addPowerInfo.URL.Datacenter_Power(), function (data) {
                 addPowerInfo.writeUPS_PageBody(data);
                 $("#powerInfo").val(1);
             });
+            $.ajaxSettings.async = true;
         } else if (data.application == addPowerInfo.Constant.TELECOME) {
             powerTitle = "开关电源信息";
+            $.ajaxSettings.async = false;
             $.getJSON(addPowerInfo.URL.Telecom_Power(), function (data) {
                 addPowerInfo.writeTelecom_PageBody(data);
                 $("#powerInfo").val(1);
             });
+            $.ajaxSettings.async = true;
         } else if (data.application == addPowerInfo.Constant.POWERUTILITY) {
             powerTitle = "直流屏信息";
+            $.ajaxSettings.async = false;
             $.getJSON(addPowerInfo.URL.PowerUtility_Power(), function (data) {
                 addPowerInfo.writePowerutility_PageBody(data);
                 $("#powerInfo").val(1);
             });
+            $.ajaxSettings.async = true;
         }
         powerFormValidate.initValidator();
         $('#powerTitle').html([
@@ -86,7 +92,7 @@ var addPowerInfo = {
         var paramList = JsonParamData.params;
         for (var i = 0; i < paramList.length; i++) {
             if (!(paramList[i].name == "needSingleMonitor" || paramList[i].name == "needEnergySaving"
-                || paramList[i].name == "needSmartMeter"||paramList[i].name == "needLeakageSensor")) {
+                || paramList[i].name == "needSmartMeter" || paramList[i].name == "needLeakageSensor")) {
                 arr.push([
                     '<div class="form-group">' +
                     '<label for="' + paramList[i].name + '" class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
@@ -133,7 +139,7 @@ var addPowerInfo = {
         '<form id="powerForm" class="form-horizontal" role="form">'].join(''));
         var paramList = JsonParamData.params;
         for (var i = 0; i < paramList.length; i++) {
-            if (!(paramList[i].name == "needLeakageSensor") ) {
+            if (!(paramList[i].name == "needLeakageSensor")) {
                 arr.push([
                     '<div class="form-group">' +
                     '<label for="' + paramList[i].name + '" class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +

@@ -25,9 +25,11 @@ var addEnvironmentInfo = {
             '<div class="btn-group">',
             '</div>',
             '</h1>'].join(''));
+        $.ajaxSettings.async = false;
         $.getJSON(addEnvironmentInfo.URL.Environment(), function (data) {
             addEnvironmentInfo.writePageBody(data);
         });
+        $.ajaxSettings.async = true;
     },
 
     writePageBody: function (JsonParamData) {

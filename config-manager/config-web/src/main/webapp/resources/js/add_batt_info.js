@@ -28,9 +28,11 @@ var addBattInfo = {
             '<div class="btn-group">',
             '</div>',
             '</h1>'].join(''));
+        $.ajaxSettings.async = false;
         $.getJSON(addBattInfo.URL.Battery(), function (data) {
             addBattInfo.writePageBody(data, upsNames);
         });
+        $.ajaxSettings.async = true;
     },
 
     writePageBody: function (JsonParamData, upsNames) {
