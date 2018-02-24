@@ -156,15 +156,21 @@ li {
 }
 
 .folder::before {
-    display: none;
-    font-family: "Font Awesome 5 Regular";
-    content: "\f07b";
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content:"\e68e";
 }
 
 .active > a > .folder::before {
-    display: none;
-    font-family: "Font Awesome 5 Regular";
-    content: "\f07c";
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content:"\e68d";
 }
 
 .arrow {
@@ -172,21 +178,27 @@ li {
 }
 
 .active > a > .arrow::before {
-    display: none;
-    /*font-family: "Font Awesome 5 Regular";*/
-    /*content: "\f0a4";*/
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content:"\e605";
 }
 
 .arrow::before {
-    display: none;
-    /*font-family: "Font Awesome 5 Regular";*/
-    /*content: "\f0a4";*/
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content:"\e604";
 }
 
 .page-wrapper {
     padding: 0 15px;
     background: white;
-    min-height: 752px;
+    min-height: 650px;
 }
 
 @media (min-width: 768px) {
@@ -223,7 +235,7 @@ li {
 }
 
 .wrapper-content {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 @media (max-width: 768px) {
@@ -237,7 +249,7 @@ li {
 }
 
 .wrapper-content > div > div > .panel {
-    min-height: 700px;
+    min-height: 500px;
 }
 
 /*.wrapper-content > div
@@ -282,8 +294,8 @@ li {
 .environmentTitle{
     margin: 0 0 12px;
     border-bottom: 1px dotted grey;
-    padding-bottom: 16px;
-    padding-top: 7px;
+    padding-bottom: 8px;
+    /*padding-top: 7px;*/
 }
 
 .powerTitle > h1,
@@ -291,7 +303,7 @@ li {
 .environmentTitle > h1{
     padding: 0;
     margin: 0 8px;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: lighter;
     color: #2679B5;
 }
@@ -363,8 +375,8 @@ li {
 .powerParam .panel-body,
 .batteryParam .panel-body,
 .environmentParam .panel-body{
-    height: 320px;
-    overflow: scroll;
+    height: 300px;
+    overflow-y: scroll;
 }
 
 .panel-title > a.editable.editable-click.editable-disabled {
@@ -422,7 +434,7 @@ div.editable-input > input {
 }
 
 .form-group{
-    margin-bottom: 10px !important;
+    margin-bottom: 5px !important;
 }
 
 .radio-inline > .form-control-feedback{
@@ -441,3 +453,18 @@ table.text-nowrap>thead>tr>th{
     font-size: 12px;
 }
 
+.panel-heading{
+    padding:5px 15px!important;
+}
+
+.wrapper-content>.row>.col-lg-12>.panel>.panel-body{
+    height:650px;
+}
+
+.icon-fw {
+    width: 1.28571429em;
+    text-align: center;
+}
+.iconfont{
+    display: inline-block;
+}

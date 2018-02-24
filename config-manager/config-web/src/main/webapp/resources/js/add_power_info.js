@@ -26,6 +26,7 @@ var addPowerInfo = {
         addPowerInfo.addSection(data);
         addPowerInfo.delete_Group();
         addPowerInfo.add_Group();
+        powerFormValidate.initValidator();
     },
 
     addSection: function (data) {
@@ -49,15 +50,16 @@ var addPowerInfo = {
                 $("#powerInfo").val(1);
             });
         }
+        powerFormValidate.initValidator();
         $('#powerTitle').html([
             '<h1 name="itemTitle" id="itemTitle">',
             powerTitle,
             '<small>',
-            '<span class="fa fa-angle-double-right"></span>',
+            '<span class="iconfont icon-shuangjiantouyou"></span>',
             '电源信息设置',
             '</small>',
             '<div class="btn-group">',
-            '<a class="btn btn-success" id="add-group"><span class="fa fa-plus-circle fa-fw"></span>新增设备</a>',
+            '<a class="btn btn-success" id="add-group"><span class="iconfont icon-jia icon-fw"></span>新增设备</a>',
             // '<a class="btn btn-success" id="changeEditStatus"><span class="fa fa-edit fa-fw"></span>修改</a>',
             '</div>',
             '</h1>'].join(''));
@@ -75,7 +77,7 @@ var addPowerInfo = {
         '<div class="panel-heading">' +
         '<h3 class="panel-title">' + JsonParamData.group + power_num +
         '<div style="display: inline;float: right;">' +
-        '<a href="javascript:void(0)" id="delete_Group" title="删除组"><span class="fa fa-trash fa-fw"></span></a>' +
+        '<a href="javascript:void(0)" id="delete_Group" title="删除组"><span class="iconfont icon-shanchu icon-fw"></span></a>' +
         '</div>' +
         '</h3>' +
         '</div>' +
@@ -94,7 +96,7 @@ var addPowerInfo = {
             } else {
                 arr.push([
                     '<div class="form-group">' +
-                    '<label for="' + paramList[i].name + '" class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
+                    '<label class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
                     '<div class="col-sm-5">' +
                     '<label class="radio-inline">' +
                     '<input type="radio" name="' + paramList[i].name + '" id="' + paramList[i].name + '" value="true"> 是' +
@@ -123,7 +125,7 @@ var addPowerInfo = {
         '<div class="panel-heading">' +
         '<h3 class="panel-title">' + JsonParamData.group + power_num +
         '<div style="display: inline;float: right;">' +
-        '<a href="javascript:void(0)" id="delete_Group" title="删除组"><span class="fa fa-trash fa-fw"></span></a>' +
+        '<a href="javascript:void(0)" id="delete_Group" title="删除组"><span class="iconfont icon-shanchu icon-fw"></span></a>' +
         '</div>' +
         '</h3>' +
         '</div>' +
@@ -141,7 +143,7 @@ var addPowerInfo = {
             } else {
                 arr.push([
                     '<div class="form-group">' +
-                    '<label for="' + paramList[i].name + '" class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
+                    '<label class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
                     '<div class="col-sm-5">' +
                     '<label class="radio-inline">' +
                     '<input type="radio" name="' + paramList[i].name + '" id="' + paramList[i].name + '" value="true"> 是' +
@@ -170,7 +172,7 @@ var addPowerInfo = {
         '<div class="panel-heading">' +
         '<h3 class="panel-title">' + JsonParamData.group + power_num +
         '<div style="display: inline;float: right;">' +
-        '<a href="javascript:void(0)" id="delete_Group" title="删除组"><span class="fa fa-trash fa-fw"></span></a>' +
+        '<a href="javascript:void(0)" id="delete_Group" title="删除组"><span class="iconfont icon-shanchu icon-fw"></span></a>' +
         '</div>' +
         '</h3>' +
         '</div>' +
@@ -196,7 +198,7 @@ var addPowerInfo = {
                 }
                 arr.push([
                     '<div class="form-group">' +
-                    '<label for="' + paramList[i].name + '" class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
+                    '<label class="col-sm-5 control-label">' + paramList[i].value + '<span class="text-danger">*</span>:</label>' +
                     '<div class="col-sm-5">' +
 
                     '<label class="radio-inline">' +
@@ -253,8 +255,8 @@ var addPowerInfo = {
 
             $('a#delete_Group').unbind();
             $('a.tips').colorbox({rel: 'gal', width: "50%", height: "50%"});
-            addPowerInfo.delete_Group();
             powerFormValidate.initValidator();
+            addPowerInfo.delete_Group();
         })
 
     },

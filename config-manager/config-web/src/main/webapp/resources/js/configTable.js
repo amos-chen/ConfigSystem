@@ -298,17 +298,17 @@ var table = {
     operationFormatter: function (value, row, index) {
         if (index < 7) {
             return '<li class="dropdown dropdown-edit">' +
-                '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-edit fa-lg"></span></a>' +
+                '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="iconfont icon-bj"></span></a>' +
                 '<ul class="dropdown-menu dropdown-menu-caret" role="menu">' +
-                '<li><a class="configInfo" href="javascript:void(0)"><span class="fa fa-copy fa-fw"></span>项目信息</a></li>' +
-                '<li><a class="configResult" href="javascript:void(0)"><span class="fa fa-cog fa-fw"></span>配置信息</a></li>' +
+                '<li><a class="configInfo" href="javascript:void(0)"><span class="iconfont icon-xinxiqueren icon-fw"></span>项目信息</a></li>' +
+                '<li><a class="configResult" href="javascript:void(0)"><span class="iconfont icon-yemianpeizhi icon-fw"></span>配置信息</a></li>' +
                 '</ul></li>';
         } else {
             return '<li class="dropdown dropdown-edit dropup">' +
-                '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-edit fa-lg"></span></a>' +
+                '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="iconfont icon-bj"></span></a>' +
                 '<ul class="dropdown-menu dropup-menu-caret" role="menu">' +
-                '<li><a class="configInfo" href="javascript:void(0)"><span class="fa fa-copy fa-fw"></span>项目信息</a></li>' +
-                '<li><a class="configResult" href="javascript:void(0)"><span class="fa fa-cog fa-fw"></span>配置信息</a></li>' +
+                '<li><a class="configInfo" href="javascript:void(0)"><span class="iconfont icon-xinxiqueren icon-fw"></span>项目信息</a></li>' +
+                '<li><a class="configResult" href="javascript:void(0)"><span class="iconfont icon-yemianpeizhi icon-fw"></span>配置信息</a></li>' +
                 '</ul></li>';
         }
     },

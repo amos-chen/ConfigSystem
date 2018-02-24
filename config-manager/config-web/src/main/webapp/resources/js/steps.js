@@ -23,7 +23,8 @@ var Steps = {
                 next: "下一步",
                 previous: "上一步",
                 loading: "加载中 ...",
-                finish: "提交"
+                finish: "提交",
+                loadingTemplate: '加载中...',
             },
             //步骤改变中
             onStepChanging: function (event, currentIndex, newIndex) {
@@ -52,6 +53,9 @@ var Steps = {
                     }
                     //如果当前步骤为第二步，即将进入第三步
                 } else if (currentIndex == 1) {
+                    if(newIndex-currentIndex==-1){
+                        return true;
+                    }
                     //判断多个表单中是否存在未填写完的表单
                     var power_is_validation = true;
                     //验证每个电源信息表单是否填写完整
@@ -85,6 +89,9 @@ var Steps = {
                     }
                     //如果当前步骤为第三步，即将进入第四步
                 } else if (currentIndex == 2) {
+                    if(newIndex-currentIndex==-1){
+                        return true;
+                    }
                     var batt_is_validation = true;
                     //验证每个电源信息表单是否填写完整
                     $($.find('form#battForm')).each(function () {

@@ -11,6 +11,7 @@ var addEnvironmentInfo = {
 
     init: function () {
         addEnvironmentInfo.addSection();
+        environmentFormValidate.initValidator();
     },
 
     addSection: function () {
@@ -18,7 +19,7 @@ var addEnvironmentInfo = {
             '<h1 name="itemTitle" id="itemTitle">',
             '环境信息',
             '<small>',
-            '<span class="fa fa-angle-double-right"></span>',
+            '<span class="iconfont icon-shuangjiantouyou"></span>',
             '环境信息设置',
             '</small>',
             '<div class="btn-group">',
@@ -54,8 +55,8 @@ var addEnvironmentInfo = {
                     '<label for="' + paramList[j].name + '" class="col-sm-5 control-label">' + paramList[j].value + '<span class="text-danger">*</span>:</label>' +
                     '<div class="col-sm-5">' +
                     '<select id="' + paramList[j].name + '" name="' + paramList[j].name + '" class="selectpicker form-control" title="请选择">' +
-                    '<option data-icon="fa fa-check-circle fa-fw" value="true">是</option>' +
-                    '<option data-icon="fa fa-times-circle fa-fw" value="false">否</option>' +
+                    '<option data-icon="iconfont icon-yes icon-fw" value="true">是</option>' +
+                    '<option data-icon="iconfont icon-no icon-fw" value="false">否</option>' +
                     '</select>' +
                     '</div></div>'].join(''));
             }

@@ -18,62 +18,6 @@
     <title>配置管理管理系统</title>
     <%@include file="common/header.jsp" %>
 
-    <script>
-        FontAwesomeConfig = {searchPseudoElements: true};
-    </script>
-
-    <style>
-        /*nav {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav a {
-            width: 30%;
-            width: 15em;
-            padding: 1em;
-            color: rgba(255,255,255, 0.75);
-            background-color: tomato;
-            border-radius: 0.25em;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        nav a:hover, nav a:focus {
-            color: rgba(255,255,255, 1.0);
-            text-decoration: none;
-        }*/
-
-        /* nav a::before {
-             display: none;
-         }*/
-
-        /*nav .svg-inline--fa {
-            margin-right: 0.5em;
-        }*/
-
-        .login::before {
-            display: none;
-            font-family: "Font Awesome 5 Solid";
-            content: "\f07b";
-        }
-
-        .tps::before {
-            display: none;
-            font-family: "Font Awesome 5 Regular";
-            content: "\f07b";
-        }
-
-        .twitter::before {
-            display: none;
-            font-family: "Font Awesome 5 Brands";
-            content: "\f07b";
-        }
-    </style>
-
 </head>
 <body>
 <div class="wrapper">
@@ -89,14 +33,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <span class="fa fa-leaf fa-fw"></span>配置管理管理系统
+                    <span class="iconfont icon-fw icon-msnui-sys-set"></span>配置管理管理系统
                 </a>
             </div>
 
             <ul class="nav taotao-top-nav navbar-right">
                 <li class="dropdown taotao-task">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="fa fa-tasks"></span>
+                        <span class="iconfont icon-02"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-caret" role="menu">
                         <li><a href="#">Action</a></li>
@@ -106,7 +50,7 @@
                 </li>
                 <li class="dropdown taotao-alarm">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="fa fa-bell"></span>
+                        <span class="iconfont icon-alarm"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-caret" role="menu">
                         <li><a href="#">Action</a></li>
@@ -116,7 +60,7 @@
                 </li>
                 <li class="dropdown taotao-message">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="fa fa-comments"></span>
+                        <span class="iconfont icon-xiazai16"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-caret" role="menu">
                         <li><a href="#">Action</a></li>
@@ -129,10 +73,10 @@
                         USER <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-caret" role="menu">
-                        <li><a href="#"><span class="fa fa-cog fa-fw"></span>设置</a></li>
-                        <li><a href="#"><span class="fa fa-user fa-fw"></span>个人中心</a></li>
+                        <li><a href="#"><span class="iconfont icon-shezhi icon-fw"></span>设置</a></li>
+                        <li><a href="#"><span class="iconfont icon-gerenzhongxin icon-fw"></span>个人中心</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="fa fa-sign-out fa-fw"></span>注销</a></li>
+                        <li><a href="#"><span class="iconfont icon-tuichu icon-fw"></span>注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -143,28 +87,31 @@
                         <input type="text" class="form-control" placeholder="search.."/>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default">
-                                <span class="fa fa-search"></span>
+                                <span class="iconfont icon-chaxun icon-fw" ></span>
                             </button>
                         </span>
                     </div>
                     <li class="active">
                         <a href="#" aria-expanded="true">
-                            <span class="fa fa-folder fa-fw"></span>配置管理
-                            <span class="fa arrow"></span></a>
+                            <%--<span class="fa fa-folder fa-fw"></span>配置管理
+                            <span class="fa arrow"></span></a>--%>
+                            <span class="folder"></span> 配置管理
+                            <span class="arrow"></span></a>
                         <ul class="nav">
                             <li><a href="/config/addConfig">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-plus fa-fw"></span>添加配置</a></li>
+                                    class="iconfont icon-fw icon-jia"></span>添加配置</a></li>
                             <li><a href="/config/listConfig">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-search fa-fw"></span>查询配置</a></li>
-                            <li><a href="/config/hardware">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-align-left fa-fw"></span>硬件管理</a></li>
+                                    class="iconfont icon-fw icon-chaxun"></span>查询配置</a></li>
+
                         </ul>
                     </li>
                     <li>
                         <a href="#" aria-expanded="false">
-                            <span class="fa fa-folder fa-fw"></span>资料管理<span class="fa arrow"></span></a>
+                            <span class="folder"></span> 资料管理<span class="arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-download fa-fw"></span>规格书下载</a>
+                            <li><a href="/config/hardware">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="iconfont icon-guanli icon-fw"></span>硬件管理</a></li>
+                            <li><a href="/config/download">&nbsp;&nbsp;&nbsp;&nbsp;<span class="iconfont icon-msnui-download icon-fw"></span>规格书下载</a>
                             </li>
                         </ul>
                     </li>

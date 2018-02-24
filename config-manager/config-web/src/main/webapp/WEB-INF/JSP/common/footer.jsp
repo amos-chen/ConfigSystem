@@ -13,8 +13,3 @@
 
 <%--jquery.serializejson--%>
 <script type="text/javascript" src="/resources/js/basicJs/jquery.serializejson.min.js"></script>
-
-<%--fontawesome--%>
-<script type="text/javascript" src="/resources/js/basicJs/fontawesome-all.min.js"></script>
-
-

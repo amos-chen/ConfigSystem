@@ -14,6 +14,7 @@ var addBattInfo = {
 
     init: function (data) {
         addBattInfo.addSection(data.upsNames);
+        battFormValidate.initValidator();
     },
 
     addSection: function (upsNames) {
@@ -21,7 +22,7 @@ var addBattInfo = {
             '<h1 name="itemTitle" id="itemTitle">',
             '电池信息',
             '<small>',
-            '<span class="fa fa-angle-double-right"></span>',
+            '<span class="iconfont icon-shuangjiantouyou"></span>',
             '电池信息设置',
             '</small>',
             '<div class="btn-group">',
@@ -59,7 +60,7 @@ var addBattInfo = {
                 if (paramList[j].name == 'batteryVoltage') {
                     arr.push([
                         '<div class="form-group">' +
-                        '<label for="' + paramList[j].name + '" class="col-sm-5 control-label">' + paramList[j].value + ':</label>' +
+                        '<label class="col-sm-5 control-label">' + paramList[j].value + ':</label>' +
                         '<div class="col-sm-5">' +
                         '<label class="radio-inline">' +
                         '<input type="radio" name="' + paramList[j].name + '" id="' + paramList[j].name + '" value="2">2V' +
@@ -122,7 +123,6 @@ var addBattInfo = {
             $(this).text(title.replace("(对应一台设备)", "") + "(对应一台设备)");
         })
         battFormValidate.initValidator();
-
     }
 
 
