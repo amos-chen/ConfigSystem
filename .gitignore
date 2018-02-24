@@ -1,0 +1,8 @@
+
+*.iml
+/.idea/
+/config-common/target/
+/config-manager/config-mapper/target/
+/config-manager/config-pojo/target/
+/config-manager/config-service/target/
+/config-manager/config-web/target/
