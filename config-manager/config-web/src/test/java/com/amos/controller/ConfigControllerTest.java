@@ -2,18 +2,29 @@ package com.amos.controller;
 
 
 import com.amos.dao.*;
+import com.amos.dto.JSTree;
+import com.amos.pojo.ConfigurationInfo;
+import com.amos.pojo.HardwareParam;
 import com.amos.service.ConfigService;
+import com.amos.service.HardwareService;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by chenlunwei on 2018/2/16.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring/applicationContext-*.xml")
+@ContextConfiguration("classpath:spring/*.xml")
 public class ConfigControllerTest {
 	@Autowired
 	private BatteryInfoMapper batteryInfoMapper;
@@ -38,6 +49,22 @@ public class ConfigControllerTest {
 
 	@Autowired
 	private ConfigService configService;
+
+	@Autowired
+	private HardwareService hardwareService;
+
+	@Autowired
+	private HardwareParamMapper hardwareParamMapper;
+
+	@Autowired
+	private ReloadableResourceBundleMessageSource messageSource;
+
+	@Test
+	public void getJSTreeNodes() throws Exception {
+		ConfigurationInfo configurationInfo = configurationInfoMapper.selectFullInfoById(1);
+		System.out.println(configurationInfo);
+	}
+
 
 	/*@Test
 	public void addConfig() throws Exception {

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: chenlunwei
@@ -7,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Page Description">
     <meta name="author" content="Amos">
-    <title>ECO Plus配置管理系统</title>
+    <title><spring:message code="common.title"/></title>
     <%@include file="common/header.jsp" %>
 
     <link rel="stylesheet" href="/resources/css/basicCss/bootstrap-table.min.css">
@@ -35,7 +36,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <span class="iconfont icon-fw icon-msnui-sys-set"></span>配置管理管理系统
+                    <span class="iconfont icon-fw icon-msnui-sys-set" style="font-size: 18px!important;"></span><spring:message code="common.navbar.brand"/>
                 </a>
             </div>
 
@@ -75,10 +76,10 @@
                         USER <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-caret" role="menu">
-                        <li><a href="#"><span class="iconfont icon-shezhi icon-fw"></span>设置</a></li>
-                        <li><a href="#"><span class="iconfont icon-gerenzhongxin icon-fw"></span>个人中心</a></li>
+                        <li><a href="#"><span class="iconfont icon-shezhi icon-fw"></span> <spring:message code="common.user.setting"/></a></li>
+                        <li><a href="#"><span class="iconfont icon-gerenzhongxin icon-fw"></span> <spring:message code="common.user.info"/></a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="iconfont icon-tuichu icon-fw"></span>注销</a></li>
+                        <li><a href="#"><span class="iconfont icon-tuichu icon-fw"></span> <spring:message code="common.user.logout"/></a></li>
                     </ul>
                 </li>
             </ul>
@@ -97,23 +98,24 @@
                         <a href="#" aria-expanded="true">
                             <%--<span class="fa fa-folder fa-fw"></span>配置管理
                             <span class="fa arrow"></span></a>--%>
-                            <span class="folder"></span> 配置管理
+                            <span class="folder"></span> <spring:message code="common.page.config.manage"/>
                             <span class="arrow"></span></a>
                         <ul class="nav">
                             <li><a href="/config/addConfig">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="iconfont icon-fw icon-jia"></span>添加配置</a></li>
+                                    class="iconfont icon-fw icon-jia"></span> <spring:message code="common.page.config.add"/></a></li>
                             <li><a href="/config/listConfig">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="iconfont icon-fw icon-chaxun"></span>查询配置</a></li>
+                                    class="iconfont icon-fw icon-chaxun"></span> <spring:message code="common.page.config.list"/></a></li>
 
                         </ul>
                     </li>
                     <li>
                         <a href="#" aria-expanded="false">
-                            <span class="folder"></span> 资料管理<span class="arrow"></span></a>
+                            <span class="folder"></span> <spring:message code="common.page.data.manage"/><span class="arrow"></span></a>
                         <ul class="nav">
                             <li><a href="/config/hardware">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="iconfont icon-guanli icon-fw"></span>硬件管理</a></li>
-                            <li><a href="/config/download">&nbsp;&nbsp;&nbsp;&nbsp;<span class="iconfont icon-msnui-download icon-fw"></span>规格书下载</a>
+                                    class="iconfont icon-guanli icon-fw"></span> <spring:message code="common.page.data.datasheet"/></a></li>
+                            <li><a href="/config/download">&nbsp;&nbsp;&nbsp;&nbsp;<span class="iconfont icon-msnui-download icon-fw"></span>
+                                <spring:message code="common.page.data.download"/></a>
                             </li>
                         </ul>
                     </li>
@@ -124,10 +126,10 @@
     <div class="page-wrapper">
         <ol class="breadcrumb bread-navbar">
             <li>
-                <a href="/"><span class="iconfont icon-fw icon-shouye"></span>首页</a>
+                <a href="/"><span class="iconfont icon-fw icon-shouye"></span> <spring:message code="common.page.home"/></a>
             </li>
-            <li><a href="#">配置管理</a></li>
-            <li class="active">查询配置</li>
+            <li><a href="#"><spring:message code="common.page.config.manage"/></a></li>
+            <li class="active"><spring:message code="common.page.config.list"/></li>
         </ol>
         <div class="wrapper-content">
             <div class="row">
@@ -197,7 +199,7 @@
 
 <%@include file="common/footer.jsp" %>
 
-<!--bootstrap-table.js-->
+<!--bootstconfigTableable.js-->
 <script type="text/javascript" src="/resources/js/basicJs/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="/resources/js/basicJs/bootstrap-table-zh-CN.min.js"></script>
 

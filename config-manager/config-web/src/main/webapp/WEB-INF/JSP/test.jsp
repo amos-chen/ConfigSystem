@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,100 +127,7 @@
             </li>
         </ol>
         <div class="wrapper-content">
-            <div class="modal fade" id="modal-download">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                    aria-hidden="true">&times;
-                            </button>
-                            <h5 class="modal-title">操作提示</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid text-center modal-delete">
-                                <div class="col-sm-12">
-                                    <h5>正在生成配置文件，请稍候...</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.modal -->
-            <button class="btn btn-info" id="test">测试</button>
-
-            <div class="col-sm-6">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th colspan="5" style="text-align: center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <h4>测试1</h4>
-                <table class="table">
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                </table>
-                <h4>测试2</h4>
-                <table class="table">
-                    <tr>
-                        <td rowspan="5">1</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="5">1</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                </table>
-
-
-
-
-            </div>
+            <h1><spring:message code="common.page.home"/> </h1>
         </div>
     </div>
 </div>

@@ -107,6 +107,12 @@
     FROM configuration_info
     WHERE id=#{configId}
   </select>
+  <select id="selectFullInfoById" resultType="com.amos.pojo.ConfigurationInfo" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM configuration_info
+    WHERE id=#{configId}
+  </select>
 
   <insert id="insertBatchSelective" parameterType="java.util.List">
     insert into configuration_info

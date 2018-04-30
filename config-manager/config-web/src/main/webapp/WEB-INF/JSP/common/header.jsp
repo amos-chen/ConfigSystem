@@ -14,9 +14,6 @@
 <!-- metisMenu.css -->
 <link rel="stylesheet" href="/resources/css/basicCss/metisMenu.min.css">
 
-<%--JSTree.css--%>
-<%--<link rel="stylesheet" href="/resources/css/basicCss/jstree.style.min.css">--%>
-
 <%--toastr.css--%>
 <link rel="stylesheet" href="/resources/css/basicCss/toastr.min.css">
 

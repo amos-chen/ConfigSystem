@@ -5,6 +5,9 @@ var table = {
         },
         configResult: function (configId) {
             return "/config/" + configId + "/Result";
+        },
+        configDownload:function () {
+            return "/config/download/configuration";
         }
     },
 
@@ -37,8 +40,8 @@ var table = {
             striped: true,
             //6.按照"name"属性所处的列进行排序，无默认值
             //sortName:String
-            //7.排序方式，升序或者降序，默认ase
-            sortOrder: 'ase',
+            //7.排序方式，升序或者降序，默认asc
+            sortOrder: 'asc',
             //8.设置为 true 将获得稳定的排序，我们会添加_position属性到 row 数据中。
             //sortStable:false
             //9.定义字体库 ('Glyphicon' or 'fa' for FontAwesome),使用"fa"时需引用 FontAwesome,默认为'glyphicon'
@@ -59,6 +62,8 @@ var table = {
                     align: 'center',
                     //halign属性是设置表头如何对齐
                     // halign: 'center'
+                    sortable:true,
+                    order:'asc'
                 }, {
                     field: 'projectTitle',
                     title: '项目标题',
@@ -76,6 +81,11 @@ var table = {
                 }, {
                     field: 'language',
                     title: '配置语言',
+                    align: 'center',
+                }, {
+                    field: 'createTime',
+                    title: '配置时间',
+                    formatter: table.createTimeFormatter,
                     align: 'center',
                 }, {
                     field: 'operation',
@@ -223,7 +233,6 @@ var table = {
                     url: table.URL.configInfo(row.configId),
                     method: 'GET',
                     success: function (result) {
-                        // console.log(result.data)
                         var configInfo = result.data;
                         var content = $('#modal-configInfo').find("div.col-sm-12");
                         var array = new Array();
@@ -280,6 +289,9 @@ var table = {
                     }
                 })
 
+            },
+            'click .configDownload': function (e, value, row, index) {
+                table.download(table.URL.configDownload(),row);
             }
         };
     },
@@ -302,6 +314,7 @@ var table = {
                 '<ul class="dropdown-menu dropdown-menu-caret" role="menu">' +
                 '<li><a class="configInfo" href="javascript:void(0)"><span class="iconfont icon-xinxiqueren icon-fw"></span>项目信息</a></li>' +
                 '<li><a class="configResult" href="javascript:void(0)"><span class="iconfont icon-yemianpeizhi icon-fw"></span>配置信息</a></li>' +
+                '<li><a class="configDownload" href="javascript:void(0)"><span class="iconfont icon-msnui-download icon-fw"></span>配置下载</a></li>' +
                 '</ul></li>';
         } else {
             return '<li class="dropdown dropdown-edit dropup">' +
@@ -309,6 +322,7 @@ var table = {
                 '<ul class="dropdown-menu dropup-menu-caret" role="menu">' +
                 '<li><a class="configInfo" href="javascript:void(0)"><span class="iconfont icon-xinxiqueren icon-fw"></span>项目信息</a></li>' +
                 '<li><a class="configResult" href="javascript:void(0)"><span class="iconfont icon-yemianpeizhi icon-fw"></span>配置信息</a></li>' +
+                '<li><a class="configDownload" href="javascript:void(0)"><span class="iconfont icon-msnui-download icon-fw"></span>配置下载</a></li>' +
                 '</ul></li>';
         }
     },
@@ -320,6 +334,14 @@ var table = {
             return "否"
         }
     },
+    createTimeFormatter: function (value, row, index) {
+        var date = new Date(value);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        return Y+M+D;
+    },
+
     applicationFomatter: function (value, row, index) {
         if (value == 1) {
             return "数据中心"
@@ -336,5 +358,49 @@ var table = {
             count++;
         }
         return count;
+    },
+
+    download: function (url,row) {
+        var data = new FormData();
+        data.append("configId",row.configId);
+        data.append("application",row.application);
+        data.append("projectName",row.projectTitle);
+        data.append("language",row.language);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);    // 也可以使用POST方式，根据接口
+        xhr.responseType = "blob";  // 返回类型blob
+        /*xhr.setRequestHeader("Content-Type"
+            , "application/x-www-form-urlencoded;charset=utf-8");*/
+        // 定义请求完成的处理函数，请求前也可以增加加载框/禁用下载按钮逻辑
+        xhr.onload = function () {
+            // 请求完成
+            if (this.status === 200) {
+                // 返回200
+                var blob = this.response;
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);  // 转换为base64，可以直接放入a表情href
+                reader.onload = function (e) {
+                    // 转换完成，创建一个a标签用于下载
+                    var a = document.createElement('a');
+                    var nowDate = new Date(row.createTime);
+                    var year = nowDate.getFullYear();
+                    var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1)
+                        : nowDate.getMonth() + 1;
+                    var day = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate
+                        .getDate();
+                    var dateStr = year + "-" + month + "-" + day;
+                    var excelName = row.projectTitle.replace("项目", "") + "项目配置" + dateStr;
+                    //文件下载前关闭提示框
+                    $('#modal-download').modal('hide');
+                    a.download = excelName + '.xlsx';
+                    a.href = e.target.result;
+                    $("body").append(a);  // 修复firefox中无法触发click
+                    a.click();
+                    $(a).remove();
+                }
+            }
+        };
+        // 发送ajax请求
+        xhr.send(data)
     }
 }

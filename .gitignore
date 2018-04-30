@@ -6,3 +6,4 @@
 /config-manager/config-pojo/target/
 /config-manager/config-service/target/
 /config-manager/config-web/target/
+/config-manager/config-web/src/test/

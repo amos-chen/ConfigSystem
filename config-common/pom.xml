@@ -115,6 +115,14 @@
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>fontbox</artifactId>
+        </dependency>
     </dependencies>
     <build />
 

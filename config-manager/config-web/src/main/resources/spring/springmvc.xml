@@ -7,6 +7,7 @@
 
 
     <context:property-placeholder location="classpath:properties/*.properties"/>
+    <context:component-scan base-package="com.amos.controller"/>
 
     <mvc:annotation-driven/>
     <!--加载静态资源,只能加载webapp下的静态资源，而不能加载webinf下的资源-->
@@ -19,9 +20,33 @@
     <!--id名字一定要是multipartResolver-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8"/>
-        <!--最大文件上传内存，5MB-->
-        <property name="maxUploadSize" value="5242880"/>
+        <!--最大文件上传内存，50MB-->
+        <property name="maxUploadSize" value="52428800"/>
     </bean>
-    
-    <context:component-scan base-package="com.amos.controller"/>
+
+    <!--国际化资源配置-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:properties/hardware/hardware</value>
+                <value>classpath:properties/common/common</value>
+                <value>classpath:properties/addConfig/addConfig</value>
+                <value>classpath:properties/download/download</value>
+                <value>classpath:properties/listConfig/listConfig</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>
+    <!--<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="common"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>-->
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    </bean>
+
 </beans>

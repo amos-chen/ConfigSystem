@@ -54,4 +54,6 @@ public interface ConfigurationInfoMapper {
     int updateBatchByPrimaryKeySelective(List<ConfigurationInfo> records);
 
 	ConfigurationInfo selectBaseInfoById(@Param("configId") Integer configId);
+
+	ConfigurationInfo selectFullInfoById(@Param("configId") Integer configId);
 }

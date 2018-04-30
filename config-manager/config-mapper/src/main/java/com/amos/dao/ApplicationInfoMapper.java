@@ -53,5 +53,5 @@ public interface ApplicationInfoMapper {
 
     int updateBatchByPrimaryKeySelective(List<ApplicationInfo> records);
 
-	List<ApplicationInfo> selectList(@Param("search") String search);
+	List<ApplicationInfo> selectList(@Param("search") String search,@Param("order") String order);
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amos.dao.HardwareCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.amos.pojo.HardwareCategory">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="parent_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="is_parent" javaType="java.lang.Boolean" jdbcType="BIT"/>
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, parent_id, name, is_parent, create_time, update_time
+    </sql>
+    <insert id="insertCategory" parameterType="com.amos.pojo.HardwareCategory">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert ignore into hardware_category (parent_id, name, is_parent, create_time, update_time)
+        VALUES (#{parentId},#{name},${isParent},#{createTime},#{updateTime})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.amos.pojo.HardwareCategory">
+        UPDATE hardware_category
+        SET parent_id=#{parentId},
+        name=#{name},
+        is_parent = #{isParent},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        where
+        id = #{id}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM hardware_category
+        WHERE id = #{id}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="com.amos.pojo.HardwareCategory">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hardware_category
+        WHERE id = #{id}
+    </select>
+    <select id="selectList" resultType="com.amos.pojo.HardwareCategory">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hardware_category
+    </select>
+    <select id="queryByParentId" resultType="com.amos.pojo.HardwareCategory">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hardware_category
+        WHERE parent_id = #{parentId}
+    </select>
+    <select id="queryCatName" resultType="java.lang.String">
+        select name from hardware_category WHERE id = #{id}
+    </select>
+
+</mapper>

@@ -88,7 +88,7 @@ public class ConfigController {
 		ExecuteItemsJsonResult<List<ApplicationInfo>> result;
 		try {
 			PageHelper.offsetPage(offset, limit);
-			List<ApplicationInfo> configList = configService.queryList(search);
+			List<ApplicationInfo> configList = configService.queryList(search,order);
 			PageInfo<ApplicationInfo> configPageInfo = new PageInfo<>(configList);
 			long total = configPageInfo.getTotal();
 			result = new ExecuteItemsJsonResult<>(true, total, configList);
@@ -125,4 +125,22 @@ public class ConfigController {
 		}
 		return result;
 	}
+
+	@RequestMapping(value = "/download/configuration", method = RequestMethod.POST)
+	@ResponseBody
+	public void downloadConfig(Integer configId,Integer application,String projectName,String language,
+							   HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Map<String, List<ExcelElement>> excelData = configService.getConfiguration(configId,application);
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String createDate = sdf.format(date);
+			String excelFileName = projectName + "配置" + createDate;
+			ExcelUtils.export(language, excelFileName, excelData, response, request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 }

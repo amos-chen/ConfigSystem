@@ -1,6 +1,7 @@
 /*设置背景*/
 body {
     background: #222;
+    /*padding-right:0!important;*/
 }
 
 .navbar-right {
@@ -252,10 +253,15 @@ li {
     min-height: 500px;
 }
 
-/*.wrapper-content > div
-.jstree-open > a > i.fa-folder:before {
-    content: '\f07c';
-}*/
+.wrapper-content > div
+.jstree-closed > a > i.iconfont::before {
+    font-family:"iconfont" !important;
+    /*font-size:16px;*/
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content:"\e68e";
+}
 
 .file-preview-image {
     height: 160px;
@@ -430,7 +436,7 @@ div.editable-input > input {
 /*content page css*/
 .CatTree{
     border-right: solid 1px #ddd;
-    min-height: 700px
+    min-height: 635px
 }
 
 .form-group{
@@ -468,3 +474,21 @@ table.text-nowrap>thead>tr>th{
 .iconfont{
     display: inline-block;
 }
+
+div.search-group>input{
+    height: 28px;
+    border: 1px solid #6FB3E0;
+    border-radius: 4px!important;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 24px;
+    color: #666 !important;
+    width: 90%;
+}
+div.search-group>span{
+    position: absolute;
+    left: 20px;
+    line-height: 28px;
+    color: #6FB3E0!important;
+}
+

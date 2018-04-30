@@ -56,8 +56,8 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
-    public List<ApplicationInfo> queryList(String search) {
-        return applicationInfoMapper.selectList(search);
+    public List<ApplicationInfo> queryList(String search,String order) {
+        return applicationInfoMapper.selectList(search,order);
     }
 
     @Override
@@ -157,6 +157,22 @@ public class ConfigServiceImpl implements ConfigService {
         return configResult;
     }
 
+    @Override
+    public Map<String, List<ExcelElement>> getConfiguration(Integer configId,Integer application) {
+        Map<String, List<ExcelElement>> excelData = null;
+        ConfigurationInfo configurationInfo = configurationInfoMapper.selectFullInfoById(configId);
+        if(application==1){
+            excelData = generatePowerutilityExcelConfig(configurationInfo.getApplicationInfo(),
+                    configurationInfo.getEnvironmentInfo(), configurationInfo.getUpsInfos());
+        }else if(application==2){
+            excelData = generatePowerutilityExcelConfig(configurationInfo.getApplicationInfo(),
+                    configurationInfo.getEnvironmentInfo(), configurationInfo.getSmpsInfos());
+        }else if(application==3){
+            excelData = generatePowerutilityExcelConfig(configurationInfo.getApplicationInfo(),
+                    configurationInfo.getEnvironmentInfo(), configurationInfo.getDirectCurrentPanelInfos());
+        }
+        return excelData;
+    }
 
     @Override
     @Transactional
@@ -300,7 +316,6 @@ public class ConfigServiceImpl implements ConfigService {
         int acquisitionTWO = 0;
         //是否需要通信柜
         boolean needCommunicateCabinetAndSwitch = true;
-        System.out.println("powerTypeNum:" + powerTypeNum);
         for (int i = 0; i < powerTypeNum; i++) {
             //判断是否需要采集模块
             boolean needSingleMonitor = true;

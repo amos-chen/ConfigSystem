@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amos.dao.HardwareParamMapper">
+    <resultMap id="BaseResultMap" type="com.amos.pojo.HardwareParam">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="category_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="model" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="length" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="width" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="height" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="file_path" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="language" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, category_id, model, length, width, height,file_path,language,create_time,update_time
+    </sql>
+    <insert id="insertParam" parameterType="com.amos.pojo.HardwareParam">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT ignore INTO hardware_param (category_id, model, length, width, height,file_path,language,create_time,update_time)
+        VALUES (#{categoryId},#{model},#{length},#{width},#{height},
+        #{filePath},#{language},#{createTime},#{updateTime})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.amos.pojo.HardwareParam">
+        UPDATE hardware_param set
+        category_id = #{categoryId},model=#{model},length = #{length},width = #{width},height=#{height},
+        file_path = #{filePath},language = #{language},create_time = #{createTime},update_time = #{updateTime}
+        where id = #{id}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM hardware_param
+        WHERE id = #{id}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="com.amos.pojo.HardwareParam">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hardware_param
+        WHERE id = #{id}
+    </select>
+    <select id="selectList" parameterType="java.lang.String" resultType="com.amos.pojo.HardwareParam">
+          SELECT
+        <include refid="Base_Column_List"/>
+          FROM hardware_param
+          WHERE 1=1
+        <if test="search !=null and !&quot;&quot;.equals(search.trim()) ">
+         and model like '%' #{search} '%' or language = #{search}
+        </if>
+    </select>
+    <select id="queryList" resultType="com.amos.pojo.HardwareParam">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hardware_param
+        WHERE 1=1
+        <if test="cid !=null">
+            and category_id = #{cid}
+        </if>
+        <if test="search !=null and !&quot;&quot;.equals(search.trim()) ">
+            and (model like '%' #{search} '%' or language = #{search})
+        </if>
+    </select>
+</mapper>
