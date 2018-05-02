@@ -195,7 +195,8 @@ var downloadTable = {
             //修改内容条目
             'click .configDownload': function (e, value, row, index) {
                 // console.log(row)
-                window.open("ftp://127.0.0.1"+row.filePath);
+                var filePath = row.filePath.replace("/home/ftpuser/","");
+                window.open("http://www.eco-config.top/download_file/"+filePath);
                 // downloadTable.download(downloadTable.URL.DownloadData(),row);
             }
         };

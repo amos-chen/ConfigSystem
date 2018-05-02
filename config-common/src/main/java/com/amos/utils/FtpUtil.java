@@ -46,7 +46,7 @@ public class FtpUtil {
             // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
             ftp.login(username, password);// 登录
             ftp.setControlEncoding("UTF-8");
-            ftp.enterLocalPassiveMode();       //设置被动模式    通知server端开通端口传输数据
+            //ftp.enterLocalPassiveMode();       //设置被动模式    通知server端开通端口传输数据
             ftp.setBufferSize(256);
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
             reply = ftp.getReplyCode();
@@ -212,8 +212,10 @@ public class FtpUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        File file = new File("C:\\Users\\Amos\\Desktop\\GB12-4.2规格书.pdf");
+        File file = new File("/Users/chenlunwei/Desktop/test.txt");
         InputStream inputStream = new FileInputStream(file);
-        uploadFile("127.0.0.1", 21, "test", "123456", "/datasheet", "/GB系列", file.getName(), inputStream);
+        String basePath = new String("/home/ftpuser".getBytes(),"UTF-8");
+        String filePath = new String("/datasheet/DB测试".getBytes(),"UTF-8");
+        uploadFile("97.64.21.206", 21, "ftpuser", "clw142720", basePath, filePath, file.getName(), inputStream);
     }
 }
