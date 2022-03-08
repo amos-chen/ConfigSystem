@@ -33,7 +33,7 @@
         <jedis.version>2.9.0</jedis.version>
         <solrj.version>5.5.4</solrj.version>
         <protostuff.version>1.0.8</protostuff.version>
-        <excel.version>3.16-beta1</excel.version>
+        <excel.version>5.2.1</excel.version>
         <xmlbean.version>2.3.0</xmlbean.version>
         <fastjson.version>1.2.46</fastjson.version>
         <pdfbox.version>2.0.15</pdfbox.version>
